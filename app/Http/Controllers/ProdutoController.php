@@ -34,10 +34,17 @@ class ProdutoController extends Controller
 
     /**
      * Display the specified resource.
+     * @param  string  $id
      */
+
     public function show(string $id)
     {
-        //
+        $produto = Produto::with(['marca', 'cidade'])->find($id);
+
+        if (!$produto)
+            return response()->json(['message' => 'Produto não encontrado'], 404);
+
+        return response()->json($produto);
     }
 
     /**
