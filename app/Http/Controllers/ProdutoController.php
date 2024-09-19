@@ -47,13 +47,6 @@ class ProdutoController extends Controller
         return response()->json($produto);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
