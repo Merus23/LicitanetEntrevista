@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProdutoRequest;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -17,19 +18,18 @@ class ProdutoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProdutoRequest $produtoRequest)
     {
-        //
+        $produto = Produto::create([
+            'nome_produto' => $produtoRequest->nome_produto,
+            'valor_produto' => $produtoRequest->valor_produto,
+            'marca_produto' => $produtoRequest->marca_produto,
+            'estoque' => $produtoRequest->estoque,
+            'cidade' => $produtoRequest->cidade,
+        ]);
+        return response()->json($produto, 201);
     }
 
     /**
