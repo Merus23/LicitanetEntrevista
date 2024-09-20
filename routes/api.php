@@ -20,9 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/', function () {
+    return response()->json(['message' => 'API - Produtos']);
+});
+
 // Rotas CRUD para o Produto
 Route::get('produtos', [ProdutoController::class, 'index']); // Lista todos os produtos
-Route::get('produtos/{id}', [ProdutoController::class, 'show']); // Busca produto por id
-Route::post('produtos', [ProdutoController::class, 'store']); // Cria um novo produto
-Route::put('produtos/{id}', [ProdutoController::class, 'update']); // Atualiza um produto existente
-Route::delete('produtos/{id}', [ProdutoController::class, 'destroy']); // Deleta um produto
+Route::get('produto/{id}', [ProdutoController::class, 'show']); // Busca produto por id
+Route::post('produto', [ProdutoController::class, 'store']); // Cria um novo produto
+Route::put('produto/{id}', [ProdutoController::class, 'update']); // Atualiza um produto existente
+Route::delete('/produto/{id}', [ProdutoController::class, 'destroy']); // Deleta um produto
