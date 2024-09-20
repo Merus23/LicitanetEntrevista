@@ -29,6 +29,7 @@ class ProdutoController extends Controller
             'estoque' => $produtoRequest->estoque,
             'cidade' => $produtoRequest->cidade,
         ]);
+
         return response()->json($produto, 201);
     }
 
