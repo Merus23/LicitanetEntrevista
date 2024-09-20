@@ -14,10 +14,10 @@ class CidadeController extends Controller
         return response()->json($cidades);
     }
 
-    public function store(string $request)
+    public function store(Request $request)
     {
         $cidade = Cidade::create([
-            'nome_cidade' => $request,
+            'nome_cidade' => $request->nome_cidade,
         ]);
 
         return response()->json($cidade, 201);
