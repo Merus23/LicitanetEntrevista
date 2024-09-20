@@ -13,63 +13,31 @@ class ProdutoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Produto::with(['marca', 'cidade'])->get();
-        return response()->json($produtos);
-    }
+        $produtos = Produto::with(['marca', 'cidade']);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $produtoRequest)
-    {
-        $produto = Produto::create([
-            'nome_produto' => $produtoRequest->nome_produto,
-            'valor_produto' => $produtoRequest->valor_produto,
-            'marca_produto' => $produtoRequest->marca_produto,
-            'estoque' => $produtoRequest->estoque,
-            'cidade' => $produtoRequest->cidade,
-        ]);
+        $minValor = $request->input('min_valor', 0);
 
-        return response()->json($produto, 201);
-    }
+        $maxValor = $request->input('max_valor', 0);
 
-    /**
-     * Display the specified resource.
-     * @param  string  $id
-     */
+        if ($minValor || $maxValor) {
+            $produtos->whereBetween('valor_produto', [$minValor, $maxValor]);
+        }
 
-    public function show(string $id)
-    {
-        $produto = Produto::with(['marca', 'cidade'])->find($id);
+        if ($request->filled('cidade')) {
+            $produtos->where('cidade', $request->cidade);
+        }
 
-        if (!$produto)
-            return response()->json(['message' => 'Produto não encontrado'], 404);
+        if ($request->filled('marca_produto')) {
+            $produtos->where('marca_produto', $request->marca_produto);
+        }
 
-        return response()->json($produto);
-    }
+        if ($request->filled('estoque_minimo')) {
+            $produtos->where('estoque', '>=', $request->estoque_minimo);
+        }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $produto = Produto::find($id);
-
-        if (!$produto)
-            return response()->json(['message' => 'Produto não encontrado'], 404);
-
-        $produto->update([
-            'nome_produto' => $request->nome_produto,
-            'valor_produto' => $request->valor_produto,
-            'marca_produto' => $request->marca_produto,
-            'estoque' => $request->estoque,
-            'cidade' => $request->cidade,
-        ]);
-
-        return response()->json($produto);
+        return response()->json($produtos->get());
     }
 
     /**
