@@ -17,7 +17,7 @@ class Produto extends Model
 
     public function cidade()
     {
-        return $this->belongsTo(Cidade::class, 'marca_produto', 'cod_cidade');
+        return $this->belongsTo(Cidade::class, 'cidade', 'cod_cidade');
     }
     use HasFactory;
 }
