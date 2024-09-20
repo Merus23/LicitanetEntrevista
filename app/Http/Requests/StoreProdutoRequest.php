@@ -25,7 +25,7 @@ class StoreProdutoRequest extends FormRequest
             'nome_produto'   => 'required|string|max:255|unique:produtos,nome_produto',
             'valor_produto'  => 'required|numeric|min:0',
             'marca_produto'  => 'required|exists:marcas,cod_marca',
-            'estoque'        => 'required|numeric|min:0',
+            'estoque'        => 'nullable|numeric|min:0',
             'cidade'         => 'required|exists:cidades,cod_cidade',
         ];
     }
