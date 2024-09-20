@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CidadeController;
+use App\Http\Controllers\MarcaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +32,9 @@ Route::get('produto/{id}', [ProdutoController::class, 'show']); // Busca produto
 Route::post('produto', [ProdutoController::class, 'store']); // Cria um novo produto
 Route::put('produto/{id}', [ProdutoController::class, 'update']); // Atualiza um produto existente
 Route::delete('/produto/{id}', [ProdutoController::class, 'destroy']); // Deleta um produto
+
+// Rotas CRUD para a Marca
+Route::post('/marca', [MarcaController::class, 'store']); // Cria uma nova marca
+
+// Rotas CRUD para a Cidade
+Route::post('/cidade', [CidadeController::class, 'store']); // Cria uma nova cidade
