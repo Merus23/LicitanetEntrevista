@@ -82,6 +82,9 @@ class ProdutoController extends Controller
         if (!$produto)
             return response()->json(['message' => 'Produto não encontrado'], 404);
 
+        if ($produto->estoque > 0)
+            return response()->json(['message' => 'Produto não pode ser removido, pois ainda possui estoque'], 400);
+
         $produto->delete();
 
         return response()->json(['message' => 'Produto removido com sucesso']);
