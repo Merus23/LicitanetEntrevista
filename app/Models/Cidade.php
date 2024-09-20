@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cidade extends Model
 {
     protected $primaryKey = 'cod_cidade';
+    protected $fillable = ['nome_cidade'];
     public function produtos()
     {
         return $this->hasMany(Produto::class, 'cod_cidade');
