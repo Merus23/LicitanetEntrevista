@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProdutoRequest;
+use App\Models\Cidade;
+use App\Models\Marca;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
