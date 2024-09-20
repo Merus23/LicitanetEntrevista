@@ -20,7 +20,7 @@ class ProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProdutoRequest $produtoRequest)
+    public function store(Request $produtoRequest)
     {
         $produto = Produto::create([
             'nome_produto' => $produtoRequest->nome_produto,
