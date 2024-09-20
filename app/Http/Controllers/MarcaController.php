@@ -15,10 +15,11 @@ class MarcaController extends Controller
         return response()->json($marcas);
     }
 
-    public function store(string $request)
+    public function store(Request $request)
     {
         $marca = Marca::create([
-            'nome_marca' => $request,
+            'nome_marca' => $request->nome_marca,
+            'fabricante' => $request->fabricante,
         ]);
 
         return response()->json($marca, 201);
