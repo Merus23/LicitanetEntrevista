@@ -13,7 +13,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::with(['marca', 'cidade'])->get();
+        $produtos = Produto::all();
         return response()->json($produtos);
     }
 
