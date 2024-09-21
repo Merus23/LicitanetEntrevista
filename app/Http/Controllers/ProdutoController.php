@@ -66,7 +66,10 @@ class ProdutoController extends Controller
      */
     public function show(string $id)
     {
-        $produto = Produto::with(['marca', 'cidade'])->find($id);
+        // Comentado porque no frontend, o produto recebe a marca e a cidade por id e não pelo nome da cidade [FIX]
+        //$produto = Produto::with(['marca', 'cidade'])->find($id);
+        $produto = Produto::find($id);
+
 
         if (!$produto)
             return response()->json(['message' => 'Produto não encontrado'], 404);
